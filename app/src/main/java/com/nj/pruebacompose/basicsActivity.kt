@@ -1,6 +1,7 @@
 package com.nj.pruebacompose
 
 import android.os.Bundle
+import android.widget.Toolbar
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,7 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +26,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,14 +39,33 @@ class basicsActivity :
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            mainFunction() //Main function en reemplazo a las lineas de codigo principales
+            viewContainer() //Main function en reemplazo a las lineas de codigo principales
         }
     }
 }
 
 @Preview
 @Composable
-private fun mainFunction() { //Funcion principal
+fun viewContainer() {
+    Scaffold(
+        topBar = { Toolbar() },
+        content = { content() },
+    )
+}
+
+@Preview
+@Composable
+
+fun Toolbar() {
+    TopAppBar(
+        title = { Text(text = "Aplicacion YO", color = colorResource(id = R.color.white)) },
+        Modifier.background(Color.LightGray)
+    )
+}
+
+@Preview
+@Composable
+private fun content() { //Funcion principal
 
     var counter by rememberSaveable { mutableStateOf(0) } //Contador tipo state para la cantidad de likes. rememberSaveable permite guardar los likes incluso despues de cambiar la orientacion del dispositivo
 
